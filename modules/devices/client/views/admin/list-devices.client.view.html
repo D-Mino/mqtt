@@ -1,0 +1,49 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Devices
+    <small>List Devices</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Devices</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">Devices</h3>
+      <div class="pull-right box-tools">
+        <button data-ui-sref="admin.devices.create" type="button" class="btn btn-info btn-sm" title="Add">
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="box-body">
+      <div class="list-group">
+        <a data-ng-repeat="device in vm.devices" class="list-group-item" style="display: block;">
+          <h4 class="list-group-item-heading" data-ng-bind="device.name" style="display: inline-block;"></h4>
+          <div style="float: right;">
+            <div style="margin-right: 24px;display: inline;float: left">
+              <button type="button" ng-repeat="item in device.gateway" class="btn btn-xs" 
+              style="background-color: {{item.status ? 'green': 'rgb(221, 221, 221)'}};margin-right: 8px;border-radius: 50%;padding: 2px 8px" ng-click="vm.toggle(device, item.order)"
+              ng-bind="item.order + 1"></button>
+            </div>
+            <div style="display: inline;">
+              <button data-ui-sref="admin.devices.edit({deviceId: device._id})" type="button" class="btn btn-info btn-xs" title="Add">
+                <i class="glyphicon glyphicon-wrench"></i>
+              </button>
+              <button type="button" class="btn btn-danger btn-xs" title="Remove" ng-click="vm.remove($index)">
+                <i class="glyphicon glyphicon-trash"></i>
+              </button>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="alert alert-warning text-center" data-ng-if="devices.$resolved && !devices.length">
+        No devices yet, why don't you <a data-ui-sref="admin.devices.create">create one</a>?
+      </div>
+    </div>
+  </div>
+</section>
